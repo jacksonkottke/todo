@@ -1,6 +1,6 @@
 // Network first for the app's own files, falling back to the last copy when offline.
 // GitHub API calls are never cached.
-const CACHE = 'todo-shell-v1';
+const CACHE = 'todo-shell-v2';
 const SHELL = ['./', 'index.html', 'app.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png',
   'fonts/Mulish-latin.woff2', 'fonts/Mulish-latin-ext.woff2', 'fonts/IbarraRealNova-latin.woff2'];
 

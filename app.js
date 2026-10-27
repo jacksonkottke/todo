@@ -224,10 +224,10 @@
   function renderStatus() {
     const s = status[current.key];
     const msg = {
-      local: 'Not connected. Tap ⚙ to connect to GitHub.',
+      local: 'Not connected. Tap the gear to connect to GitHub.',
       offline: 'Can’t reach GitHub. Changes are saved on this phone and will sync later.',
-      readonly: 'Not syncing: the token can’t read or write the repo. Check it in ⚙.',
-      error: 'Not syncing: GitHub returned an error. Check the token in ⚙.',
+      readonly: 'Not syncing: the token can’t read or write the repo. Check it in Settings (the gear).',
+      error: 'Not syncing: GitHub returned an error. Check the token in Settings (the gear).',
     }[s] || '';
     $('sync').textContent = msg;
     $('sync').hidden = !msg;
