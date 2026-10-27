@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>To-Do</title>
+<meta name="theme-color" content="#123155">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="To-Do">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preload" href="fonts/Mulish-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="top__row">
+    <h1 id="title">To-Do</h1>
+    <span class="top__tools">
+      <button type="button" class="iconbtn" id="refresh" aria-label="Sync now" title="Sync now">⟳</button>
+      <button type="button" class="iconbtn" id="open-settings" aria-label="Settings" title="Settings">⚙</button>
+    </span>
+  </div>
+  <div class="daynav">
+    <button type="button" class="daynav__btn" id="prev" aria-label="Previous day">‹</button>
+    <label class="daynav__label">
+      <span id="day" aria-live="polite">Today</span>
+      <input type="date" id="pick" aria-label="Jump to a day">
+    </label>
+    <button type="button" class="daynav__btn" id="next" aria-label="Next day">›</button>
+    <button type="button" class="linkbtn" id="today" hidden>Today</button>
+    <span class="count" id="count"></span>
+  </div>
+</header>
+
+<main id="main">
+  <p class="sync" id="sync" role="status" hidden></p>
+  <ul class="list" id="list"></ul>
+  <p class="empty" id="empty" hidden>Nothing here yet.</p>
+</main>
+
+<form class="add" id="add" autocomplete="off">
+  <label class="visually-hidden" for="add-text">New item</label>
+  <input id="add-text" type="text" maxlength="300" placeholder="Add a to-do" enterkeyhint="done">
+  <button type="submit" class="btn">ADD</button>
+</form>
+
+<nav class="tabs" id="tabs" aria-label="Lists"></nav>
+
+<dialog id="edit" class="sheet">
+  <form method="dialog" id="edit-form">
+    <h2 class="sheet__title">Edit</h2>
+    <label class="field"><span>Text</span>
+      <textarea id="edit-text" rows="3" maxlength="300"></textarea></label>
+    <label class="field"><span>Day</span>
+      <input id="edit-date" type="date" required></label>
+    <div class="sheet__actions">
+      <button type="button" class="linkbtn danger" id="edit-delete">Delete</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn btn--ghost" id="edit-cancel">Cancel</button>
+      <button type="submit" class="btn" id="edit-save">SAVE</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="settings" class="sheet">
+  <form method="dialog" id="settings-form">
+    <h2 class="sheet__title">Connect to GitHub</h2>
+    <p class="sheet__note">This app reads and saves your lists in the private <code>briefings</code> repo, the same files your new-tab page and Claude use. Paste a GitHub token that can read and write that repo. It's kept only on this phone.</p>
+    <p class="sheet__note"><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Make a token on GitHub</a>: name it anything, Repository access → <b>Only select repositories</b> → <code>briefings</code>, then Permissions → <b>Contents: Read and write</b>.</p>
+    <label class="field"><span>Token</span>
+      <input id="f-token" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…"></label>
+    <details class="sheet__more">
+      <summary>Repository and branch</summary>
+      <label class="field"><span>Repository</span>
+        <input id="f-repo" type="text" autocapitalize="off" spellcheck="false"></label>
+      <label class="field"><span>Branch</span>
+        <input id="f-branch" type="text" autocapitalize="off" spellcheck="false"></label>
+    </details>
+    <p class="sheet__error" id="f-error" role="alert" hidden></p>
+    <div class="sheet__actions">
+      <button type="button" class="linkbtn danger" id="f-forget" hidden>Forget token</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn btn--ghost" id="f-cancel">Cancel</button>
+      <button type="submit" class="btn" id="f-save">SAVE AND CONNECT</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
